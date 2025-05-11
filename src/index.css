@@ -1,0 +1,214 @@
+.appContainer{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 22rem;
+  height: 22rem;
+  /* margin: 0 auto; */
+  max-width: 20rem;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#test-container {
+  display: flex;
+  gap: 2rem;
+  /* box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.2); */
+  margin: 1rem;
+  padding: 1rem;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.5rem;
+  width: 22rem;
+  height: 22rem;
+  margin: 0 auto;
+  /* border: 1px rgb(0, 0, 0) solid; */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 1px 10px 300px rgba(0, 0, 0, 0.2);
+}
+
+#grid div {
+  /* display: flex; */
+  width: 7rem;
+  height: 7rem;
+  box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.2);
+  /* align-items: center; */
+  border-radius: 0.5rem;
+  /* justify-content: center; */
+}
+
+#grid div:nth-child(3),
+#grid div:nth-child(5),
+#grid div:nth-child(7) {
+  background-color: red;
+}
+
+#grid div:nth-child(4n-3) {
+  background-color: green;
+
+}
+
+#grid div:not(:nth-child(4n-3)) {
+  background-color: transparent;
+  box-shadow: none;
+
+}
+
+#grid1 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 22rem;
+  height: 22rem;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 1px 10px 300px rgba(0, 0, 0, 0.2);
+
+}
+
+#first {
+  color: rgb(10, 234, 13);
+  width: 7rem;
+  height: 7rem;
+  align-content: center;
+  background: linear-gradient(90deg, rgb(26, 73, 32), rgb(10, 234, 13));
+  /* box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.2); */
+  border-radius: 0.5rem;
+
+}
+
+#second {
+  color: rgb(10, 234, 13);
+  width: 7rem;
+  height: 7rem;
+  /* margin: 0 auto; */
+  align-content: center;
+  align-self: center;
+  background: linear-gradient(90deg, rgb(26, 73, 32), rgb(10, 234, 13));
+  /* box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.2); */
+  border-radius: 0.5rem;
+}
+
+#third {
+  color: rgb(10, 234, 13);
+  width: 7rem;
+  height: 7rem;
+  align-self: flex-end;
+  align-content: center;
+  background: linear-gradient(90deg, rgb(26, 73, 32), rgb(10, 234, 13));
+  /* box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.2); */
+  border-radius: 0.5rem;
+}
+
+
+
+#mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 auto;
+  width: 30rem;
+  height: 15rem;
+  /* background: linear-gradient(0deg, black, grey); */
+  border-radius: 0.5rem;
+}
+#trafficLightContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+  width: 3rem;
+  height: 10rem;
+  background: linear-gradient(0deg, black, grey);
+  border-radius: 0.5rem;
+}
+.defaultBox {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 0.05rem solid white;
+  background-color: azure;
+}
+.red{
+  background-color: red;
+}
+.green{
+  background-color: greenyellow;
+}
+.yellow{
+  background-color: yellow;
+}
+#timer{
+ width: 20rem;
+ background-color: white;
+ border: 2px solid rgb(5, 5, 5);
+ height: 1.5rem;
+ border-radius: 0.5rem;
+ color: black;
+ display: flex;
+ /* align-self: center; */
+ justify-content: center;
+ overflow: hidden;
+}
+#timer div {
+  width : 0%;
+  background-color: white;
+  transition: width 0.2s ease-out;
+}
+
+
+#container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#boxContainer {
+  display: flex;
+  gap: 0.5rem;
+  margin: 2rem auto;
+  align-items: center;
+  background: linear-gradient(90deg, black, grey);
+  width: 15rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+}
+
+#boxContainer div {
+  margin: 0.5rem;
+  align-content: center;
+  background: linear-gradient(90deg, rgb(194, 193, 193), rgb(255, 255, 255));
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+.disableBox {
+  pointer-events: none;
+  opacity: 0.5;
+  background: none;
+  background-color: rgb(0, 252, 252);
+}
+
+
+
+

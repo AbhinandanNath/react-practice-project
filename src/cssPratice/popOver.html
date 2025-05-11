@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popover Example</title>
+  <style>
+    .popover-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .popover {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      z-index: 1000;
+      display: none;
+    }
+
+    .popover::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent #ccc transparent;
+    }
+
+    .popover::after {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent transparent #fff transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="popover-container">
+    <button id="popover-btn">Click Me</button>
+    <div id="popover" class="popover">
+      <p>This is a popover!</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const popoverBtn = document.getElementById("popover-btn");
+      const popover = document.getElementById("popover");
+
+      popoverBtn.addEventListener("click", () => {
+        if (popover.style.display === "block") {
+          popover.style.display = "none";
+        } else {
+          popover.style.display = "block";
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!popoverBtn.contains(event.target) && !popover.contains(event.target)) {
+          popover.style.display = "none";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

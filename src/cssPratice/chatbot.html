@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta viewport="width=device-width,initial-scale=1.0" />
+    <style>
+      #divContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #counterContainer {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        margin-top: 2rem;
+        width: 20rem;
+        /* max-width: 30rem; */
+        border: 1px solid rgb(26, 115, 232);
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+      #countervalue {
+        width: 0%;
+        background-color: rgb(26, 115, 232);
+        transition: width 0.2s ease-out;
+      }
+      #mainContainer {
+        width: 20rem;
+        height: 30rem;
+        background: linear-gradient(0deg, rgb(123, 120, 120), white);
+        margin: 2rem auto;
+        border: 2px solid grey;
+        border-radius: 0.5rem;
+        /* position: relative; */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #header {
+        height: 2rem;
+        width: 20rem;
+        background: grey;
+        text-align: center;
+        line-height: 2rem;
+        color: white;
+        font-weight: bold;
+      }
+
+      #chatArea {
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column-reverse;
+        flex: 1;
+      }
+      .messageDiv {
+        color: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        width: 5rem;
+        max-width: 18rem;
+        margin: 0.5rem;
+        word-wrap: break-word;
+
+        transition: opacity 0.5s ease-in; /* Smooth transition for opacity and transform */
+        opacity: 0; /* Initial state: hidden */
+        transform: translateY(10px); /* Initial state: slightly below */
+      }
+
+      .left {
+        align-self: flex-start;
+        background: rgb(26, 115, 232);
+      }
+
+      .right {
+        align-self: flex-end;
+        background: rgb(34, 193, 195);
+      }
+      #searchField {
+        bottom: 0;
+        width: 19rem;
+        display: flex;
+        gap: 0.5rem;
+        height: 2rem;
+        margin: 0rem 0.5rem 0.5rem 0.5rem;
+      }
+      #searchField input {
+        bottom: 0;
+        width: 25rem;
+        border-radius: 0.5rem;
+        padding: 0.4rem;
+      }
+      #searchField button {
+        bottom: 0;
+        width: 3rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        background-color: rgb(26, 115, 232);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="divContainer">
+      <div id="counterContainer">
+        <div id="countervalue">0</div>
+      </div>
+      <div id="mainContainer">
+        <div id="header">Chatbot</div>
+        <div id="chatArea"></div>
+        <div id="searchField">
+          <input type="search" id="chatInput" placeholder="Type a message..." />
+          <button id="sendButton">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let counterValue = document.getElementById("countervalue");
+        let counter = 0;
+        let interval = 2000;
+
+        function updateCounter() {
+            counter++;
+            counterValue.style.width = counter +'%';
+            counterValue.textContent = counter;
+            console.log(interval)
+            if(interval > 200) {
+              interval -=100;
+            }
+            if(counter == 100){
+              return;
+            }
+            setTimeout(updateCounter,interval);
+
+          }
+          updateCounter();
+
+        let sendButton = document.getElementById("sendButton");
+        let chatArea = document.getElementById("chatArea");
+        let chatInput = document.getElementById("chatInput");
+        let isRightText = true;
+
+        function addInput() {
+          let message = chatInput.value.trim();
+          if (message === "") return;
+
+          let messageDiv = document.createElement("div");
+          messageDiv.classList.add(
+            "messageDiv",
+            isRightText ? "right" : "left"
+          );
+          messageDiv.textContent = message;
+
+          chatArea.prepend(messageDiv);
+          //   chatArea.scrollTop = chatArea.scrollHeight;
+
+          setTimeout(() => {
+            messageDiv.style.opacity = "1"; // Make the message visible
+            messageDiv.style.transform = "translateY(0)"; // Reset the position
+          }, 10);
+
+          chatInput.value = "";
+          isRightText = !isRightText;
+        }
+
+        sendButton.addEventListener("click", addInput);
+
+        document.addEventListener("keypress", () => {
+          if (event.key == "Enter") {
+            addInput();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

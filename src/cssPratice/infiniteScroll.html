@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Scrolling</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .content {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .loading {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 1.2rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div id="contentContainer">
+    <!-- Initial content will be loaded here -->
+  </div>
+  <div class="loading" id="loading">Loading...</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const contentContainer = document.getElementById("contentContainer");
+      const loading = document.getElementById("loading");
+
+      let page = 1; // Track the current page
+      const limit = 10; // Number of items to load per request
+      const totalPages = 5; // Simulate a total number of pages
+
+      // Function to fetch and append content
+      function loadContent() {
+        if (page > totalPages) {
+          loading.textContent = "No more content to load.";
+          return;
+        }
+
+        // Simulate an API call with a timeout
+        setTimeout(() => {
+          for (let i = 1; i <= limit; i++) {
+            const content = document.createElement("div");
+            content.className = "content";
+            content.textContent = `Item ${(page - 1) * limit + i}`;
+            contentContainer.appendChild(content);
+          }
+          page++;
+          loading.style.display = "none";
+        }, 1000);
+      }
+
+      // Function to detect when the user scrolls near the bottom
+      function handleScroll() {
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+        if (scrollTop + clientHeight >= scrollHeight - 5) {
+          loading.style.display = "block";
+          loadContent();
+        }
+      }
+
+      // Initial content load
+      loadContent();
+
+      // Attach scroll event listener
+      window.addEventListener("scroll", handleScroll);
+    });
+  </script>
+</body>
+</html>

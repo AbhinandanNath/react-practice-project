@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Popover</title>
+    <style>
+      #mainContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      #popoverBtn {
+        width: 5rem;
+        height: 2rem;
+        cursor: pointer;
+      }
+      #customPopover {
+        background: linear-gradient(90deg, rgb(116, 116, 116), grey);
+        text-align: center;
+        padding: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.8s ease-in-out;
+        opacity: 0;
+      }
+      #customPopover.show {
+        opacity: 1;
+        display: block;
+        transform: translateY(1rem) scale(2, 2);
+      }
+      #customPopover {
+        opacity: 1;
+        display: block;
+        transform: translateY(1rem) scale(2, 2);
+      }
+      #popoverCloseBtn {
+        color: antiquewhite;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mainContainer">
+      <button id="popoverBtn">OPEN</button>
+      <div id="customPopover">
+        <p>Custom PopOver</p>
+        <button id="popoverCloseBtn">X</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let openButton = document.getElementById("popoverBtn");
+        let closeButton = document.getElementById("popoverCloseBtn");
+        let customPopover = document.getElementById("customPopover");
+
+        function disableEnableBtn() {
+            let isVisible = customPopover.classList.contains("show");
+            openButton.disabled = isVisible;
+        }
+
+        function showPopUp() {
+          customPopover.classList.toggle("show");
+          disableEnableBtn();
+        }
+
+        
+
+        openButton.addEventListener("click", showPopUp);
+        closeButton.addEventListener("click", showPopUp);
+
+       document.addEventListener('click',() => {
+        if(!customPopover.contains(event.target) && event.target !== openButton){
+            showPopUp();
+        }
+       })
+      });
+    </script>
+  </body>
+</html>

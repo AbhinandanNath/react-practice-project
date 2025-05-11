@@ -1,0 +1,220 @@
+.gameScreen {
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    width: 50rem;
+    height:42rem;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    border-radius: 0.5rem;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;;
+}
+
+.playerScreen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:2rem;
+    width: 30rem;
+    height:5rem;
+    
+}
+
+#playerBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width : 20rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: linear-gradient(90deg, rgb(19, 18, 18), rgb(78, 73, 73));
+}
+
+.playerName{
+    background: none;
+    border: 1px solid white;
+    border-radius: 0.5rem;
+    width : 15rem;
+    height: 2rem;
+    text-align: center;
+    /* margin: 1rem; */
+    color: white;
+    align-content: center;
+    
+}
+
+.playerSymbol {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1rem;
+}
+
+#playerBox button {
+    border-radius: 0.5rem;
+    width : 4rem;
+    height: 2rem;
+    text-align: center;
+   
+}
+
+#playerBox button:hover {
+    cursor: pointer;
+    background-color: rgb(133, 143, 143);
+}
+
+#gameboard{
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    background: linear-gradient(90deg, rgb(19, 18, 18), rgb(78, 73, 73));
+    gap: 0.5rem;
+    width: 17rem;
+    height: 17rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+#gameboard div {
+    font-size: 2rem;
+    font-weight: bolder;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(5, 5, 5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    background: linear-gradient(90deg, rgb(250, 249, 248), rgb(172, 166, 149));
+    box-shadow: 1px 1px 10px rgb(250, 250, 250);
+    width: 5rem;
+    height: 5rem;
+}
+.turn {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bolder;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Glowing effect */
+    animation: animateCurrentPlayer 1.5s infinite;
+}
+
+.symbol {
+    animation: scale 1.5s infinite;
+}
+.symbol:hover {
+    transform: scale(1.1);
+}
+
+.filled {
+    background: linear-gradient(90deg, rgb(203, 123, 38), rgb(250, 104, 0)) !important;
+    box-shadow:none !important;
+}
+
+.gameOverScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue gradient */
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out; /* Smooth fade-in animation */
+}
+
+.gameOverScreen h1 {
+    color: #ffcc00; /* Gold color for the winner text */
+    font-size: 4rem;
+    font-weight: bolder;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Glowing effect */
+    animation: bounce 1.5s infinite; /* Bounce animation for emphasis */
+}
+
+.gameOverScreen p {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin-top: 1rem;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.gameOverScreen button {
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Warm gradient */
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gameOverScreen button:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+    box-shadow: 0px 4px 15px rgba(255, 126, 95, 0.5); /* Glow effect */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes scale {
+    0%, 100% {
+        transform: scale(1);
+        color: #a6c919;
+    }
+    50% {
+        transform: scale(1.2);
+        font-weight: bolder;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* Glowing effect */
+    }
+}
+
+@keyframes animateCurrentPlayer {
+    0% {
+        transform: scale(1);
+        color: #dcf900;
+    }
+    50% {
+        transform: scale(1.1);
+        font-weight: bolder;
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        color: #1bf902;
+        text-shadow: 2px 2px 10px rgba(22, 2, 110, 0.5); /* Glowing effect */
+    }
+    100% {
+        transform: scale(1);
+        color: #dcf900;
+    }
+}

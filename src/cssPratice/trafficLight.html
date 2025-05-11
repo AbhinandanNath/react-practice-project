@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Traffic Light</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      #trafficLightContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin: 0 auto;
+        width: 3rem;
+        height: 10rem;
+        background: linear-gradient(0deg, black, grey);
+        border-radius: 0.5rem;
+      }
+      .defaultBox {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border: 0.05rem solid white;
+        background-color: azure;
+      }
+      .red{
+        background-color: red;
+      }
+      .green{
+        background-color: greenyellow;
+      }
+      .yellow{
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="trafficLightContainer">
+      <div  class="defaultBox" id="red"></div>
+      <div  class="defaultBox" id="yellow"></div>
+      <div   class="defaultBox" id="green"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded',() => {
+            let green = document.getElementById('green');
+            let red = document.getElementById('red');
+            let yellow = document.getElementById('yellow');
+
+            let timeIntervalMap = new Map([
+                [red, 4000],
+                [yellow, 1000],
+                [green, 3000],
+            ]);
+
+            let currentIndex = 0;
+
+            function handleLightChange() {
+
+                timeIntervalMap.forEach((value, key) => key.classList.remove('red','yellow','green'));
+                let lightDataList = Array.from(timeIntervalMap.entries());
+                let duration = lightDataList[currentIndex][1];
+                
+                let currentLight = lightDataList[currentIndex][0];
+                currentLight.classList.add(currentLight.id);
+              
+
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % lightDataList.length;
+                    handleLightChange();
+                },duration)
+            }
+
+            handleLightChange();
+        })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Carousel</title>
+  <style>
+    /* Carousel Container */
+    .carousel {
+      position: relative;
+      width: 20rem;
+      max-width: 600px;
+      margin: auto;
+      overflow: hidden;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+
+    /* Carousel Images */
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    /* Navigation Buttons */
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      /* transform: translateY(-50%); */
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .carousel-button.prev {
+      left: 10px;
+    }
+
+    .carousel-button.next {
+      right: 10px;
+    }
+
+    /* Dots/Indicators */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">Image Carousel</h1>
+
+  <!-- Carousel Container -->
+  <div class="carousel">
+    <div class="carousel-images">
+      <img src="pic1.webp" alt="Image 1">
+      <img src="pic2.webp" alt="Image 2">
+      <img src="pic3.png.webp" alt="Image 3">
+    </div>
+    <button class="carousel-button prev">❮</button>
+    <button class="carousel-button next">❯</button>
+  </div>
+
+  <!-- Dots/Indicators -->
+  <div class="carousel-dots">
+    <div class="carousel-dot active" data-index="0"></div>
+    <div class="carousel-dot" data-index="1"></div>
+    <div class="carousel-dot" data-index="2"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = document.querySelector(".carousel-images");
+      const dots = document.querySelectorAll(".carousel-dot");
+      const totalImages = images.children.length;
+      let currentIndex = 0;
+
+      // Update Carousel
+      function updateCarousel() {
+        images.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === currentIndex);
+        });
+      }
+
+      // Next Button
+      document.querySelector(".next").addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % totalImages;
+        updateCarousel();
+      });
+
+      // Previous Button
+      document.querySelector(".prev").addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        updateCarousel();
+      });
+
+      // Dot Navigation
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          currentIndex = parseInt(dot.getAttribute("data-index"));
+          updateCarousel();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
