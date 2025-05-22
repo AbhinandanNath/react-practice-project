@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line no-unused-vars
-
 function secondLargestElement(nums) {
   if (nums.length == 0 || nums.length == 1) {
     return -1;

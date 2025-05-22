@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line no-unused-vars
-
 function maxConsecutiveOnes(nums) {
   let count = 0;
   let maxCount = 0;
