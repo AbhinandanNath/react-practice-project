@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { useRef, useCallback} from "react";
+import { useRef, useCallback } from "react";
 import { styled } from "styled-components";
 
 const SearchContainer = styled.div`
@@ -77,10 +77,6 @@ export default function Debounce() {
     </SearchContainer>
   );
 }
-
-
-
-
 
 // Usage
 

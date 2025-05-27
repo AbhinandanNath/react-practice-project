@@ -20,13 +20,15 @@ export default function Tooltip({ targetRef, visible }) {
       let tooltip = tooltipRef.current;
       let elementPosition = element.getBoundingClientRect();
 
-    tooltip.style.top = `${elementPosition.bottom + window.scrollY }px`;
-    tooltip.style.left = `${elementPosition.left + window.scrollX + 100}px`;
-    tooltip.style.opacity = 1;
+      tooltip.style.top = `${elementPosition.bottom + window.scrollY}px`;
+      tooltip.style.left = `${elementPosition.left + window.scrollX + 100}px`;
+      tooltip.style.opacity = 1;
     }
-  },[visible,targetRef]);
+  }, [visible, targetRef]);
 
   return (
-    <>{visible && <TooltipContainer ref={tooltipRef}>Tooltip</TooltipContainer>}</>
+    <>
+      {visible && <TooltipContainer ref={tooltipRef}>Tooltip</TooltipContainer>}
+    </>
   );
 }

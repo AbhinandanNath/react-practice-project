@@ -12,8 +12,7 @@
 // if we didnt have promises we would have use nested callbacks to achieve this .
 // Nested callbacksknow as call back hell or pyramid doom
 // now we have if else checks or more api calls this becomes complex and hard to maintain
-const GITHUB_API = "https://api.github.com/users/abhinandanNath";
-const cart = ["shoes", "mobile"];
+
 // createOrder(cart, function (orderId) {
 //   proceedToPayment(orderId, function (paymentInfo) {
 //     showorderSummary(paymentInfo, function () {
@@ -42,59 +41,60 @@ const cart = ["shoes", "mobile"];
 //   .then((paymentInfo) => showorderSummary(paymentInfo))
 //   .then((paymentPage) => updateWalletBalance());
 
-export default function TestPromise() {
-  function printDataValue(data) {
-    console.log(data);
-  }
-  // const userData = fetch(GITHUB_API);
-  // console.log(userData);
-  // userData.then(printDataValue);
+const cart = ["shoes", "mobile"];
 
-  const myPromise = new Promise((res, reject) => {
-    if (1) {
-      res("Success value");
+function validateCart(cart) {
+  return cart.length == 0;
+}
+function createOrder(cart) {
+  const createPromise = new Promise((resolve, reject) => {
+    if (validateCart(cart)) {
+      let cartError = new Error("Cart is not valid");
+      reject(cartError);
+    }
+    let orderId = "12345"; //lets say you get orderID from the DB
+    if (orderId) {
+      resolve(orderId);
     } else {
-      reject("Error reason");
+      let orderError = new Error("Order is not valid");
+      reject(orderError);
     }
   });
 
-  myPromise
-    .then((value) => {
-      console.log(value); // "Success value"
+  return createPromise;
+}
+
+function proceedToPayment(orderId) {
+  const paymentPromise = new Promise((resolve, reject) => {
+    if (!orderId) {
+      let paymentError = new Error("Not a valid orderId");
+      reject(paymentError);
+    }
+    let paymentInfo = "Payment is Succesfull";
+    resolve(paymentInfo);
+  });
+
+  return paymentPromise;
+}
+export default function CreateOrderPromise() {
+  const createOrderPromise = createOrder(cart);
+  createOrderPromise
+    .then(function (orderId) {
+      console.log(orderId);
+      return orderId;
     })
-    .catch((error) => {
-      console.log(error); //"Error reason"
+    .catch(function (error) {
+      console.log(error);
     })
-    .finally(() => {
-      printDataValue("Promise Fulfilled");
+    .then(function (orderId) {
+      return proceedToPayment(orderId);
+    })
+    .then(function (paymentInfo) {
+      console.log(paymentInfo);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
 
-  Promise.resolve(1)
-    .then((val) => val + 1)
-    .then((val) => val + 2)
-    .then((val) => printDataValue(val))
-    .catch((error) => printDataValue(error));
-
-  const p1 = new Promise((res) => setTimeout(() => res("first"), 200));
-  const p2 = new Promise((res, reject) => setTimeout(() => res("Second"), 100));
-  const p3 = new Promise((res) => setTimeout(() => res("Third"), 300));
-
-  Promise.all([p1, p2, p3])
-    .then((val) => printDataValue(val))
-    .catch((error) => printDataValue(error));
-
-  Promise.race([p1, p2, p3])
-    .then((val) => printDataValue(val))
-    .catch((error) => printDataValue(error));
-
-  function delay(ms) {
-    return new Promise((resolve, reject) =>
-      setTimeout(() => {
-        resolve(`${ms / 1000} seconds Passed`);
-      }, ms)
-    );
-  }
-  delay(2000)
-    .then((val) => printDataValue(val))
-    .catch((error) => printDataValue(error));
+  return <div>Create Order</div>;
 }
